@@ -1,4 +1,4 @@
-package main
+package generator
 
 // Custom predefined layouts
 const (

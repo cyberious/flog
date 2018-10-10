@@ -1,4 +1,4 @@
-package main
+package generator
 
 // ContainsString checks if a string array contains a given string
 func ContainsString(arr []string, str string) bool {

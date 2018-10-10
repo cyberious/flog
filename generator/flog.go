@@ -1,4 +1,4 @@
-package main
+package generator
 
 import (
 	"compress/gzip"
@@ -14,6 +14,7 @@ import (
 // Generate generates the logs with given options
 func Generate(option *Option) error {
 	splitCount := 1
+
 	delta := time.Duration(0)
 
 	logFileName := option.Output
@@ -26,6 +27,7 @@ func Generate(option *Option) error {
 		// Generates the logs until the certain number of lines is reached
 		for line := 0; line < option.Number; line++ {
 			log := NewLog(option.Format, delta)
+
 			writer.Write([]byte(log + "\n"))
 
 			if (option.Type != "stdout") && (option.SplitBy > 0) && (line > option.SplitBy*splitCount) {
@@ -75,7 +77,7 @@ func NewWriter(logType string, logFileName string) (io.WriteCloser, error) {
 	case "stdout":
 		return os.Stdout, nil
 	case "log":
-		logFile, err := os.Create(logFileName)
+		logFile, err := os.OpenFile(logFileName, os.O_RDWR|os.O_APPEND, 0666)
 		if err != nil {
 			return nil, err
 		}

@@ -1,10 +1,10 @@
 package main
 
 import (
+	. "github.com/cyberious/flog/generator"
+	"github.com/mingrammer/cfmt"
 	"math/rand"
 	"time"
-
-	"github.com/mingrammer/cfmt"
 )
 
 func main() {
